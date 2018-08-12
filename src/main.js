@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import Button from 'ant-design-vue/lib/button'
 import 'ant-design-vue/dist/antd.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App'
 
 Vue.component(Button.name, Button)

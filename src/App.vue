@@ -1,6 +1,17 @@
 <template>
   <div id="app">
-    <a-button type="primary">Button</a-button>
+    <!-- As a link -->
+    <nav class="navbar navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="#">Navbar</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="wc mt-3">
+        <a-button type="primary">Button</a-button>
+      </div>
+    </div>
     <HelloWorld/>
   </div>
 </template>
@@ -15,10 +26,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-  text-align: center;
-  margin-top: 60px;
-}
-</style>
