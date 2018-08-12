@@ -1,12 +1,12 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import Button from 'ant-design-vue/lib/button'
+import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App'
 
-Vue.component(Button.name, Button)
+Vue.use(Antd)
 
 Vue.config.productionTip = false
 

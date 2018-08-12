@@ -3,16 +3,16 @@
     <!-- As a link -->
     <nav class="navbar navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">World Cup 2018</a>
       </div>
     </nav>
 
     <div class="container">
       <div class="wc mt-3">
-        <a-button type="primary">Button</a-button>
+        <HelloWorld/>
       </div>
     </div>
-    <HelloWorld/>
+
   </div>
 </template>
 
