@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="filter mb-3">
-      <a-checkbox @change="onChange">显示红牌</a-checkbox>
-      <a-checkbox @change="onChange">显示黄牌</a-checkbox>
+      <a-checkbox v-model="showRed">显示红牌</a-checkbox>
+      <a-checkbox v-model="showYellow">显示黄牌</a-checkbox>
 
       <a-radio-group defaultValue=0 v-model="lang">
         <a-radio-button value=0>简体</a-radio-button>
@@ -13,8 +13,16 @@
 
     <a-table :columns="columns" :dataSource="data">
       <template slot="league" slot-scope="league">{{ league[lang] }}</template>
-      <template slot="home" slot-scope="home">{{ home[lang] }}</template>
-      <template slot="guest" slot-scope="guest">{{ guest[lang] }}</template>
+      <template slot="home" slot-scope="home, match">
+        <a-badge :count="match.homeYellow" v-show="showYellow" :numberStyle="{backgroundColor: 'yellow', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset'}" />
+        <a-badge :count="match.homeRed" v-show="showRed" :numberStyle="{backgroundColor: 'red', color: '#fff', boxShadow: '0 0 0 1px #d9d9d9 inset'}" />
+        {{ home[lang] }}
+      </template>
+      <template slot="guest" slot-scope="guest, match">
+        {{ guest[lang] }}
+        <a-badge :count="match.guestRed" v-show="showRed" :numberStyle="{backgroundColor: 'red', color: '#fff', boxShadow: '0 0 0 1px #d9d9d9 inset'}" />
+        <a-badge :count="match.guestYellow" v-show="showYellow" :numberStyle="{backgroundColor: 'yellow', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset'}" />
+      </template>
       <span slot="score" slot-scope="text, record, index">{{ record.homeScore }} - {{ record.guestScore}}</span>
       <span slot="homeScore" slot-scope="text, record, index">{{ record.homeHalfScore }} - {{ record.guestHalfScore}}</span>
     </a-table>
@@ -60,12 +68,11 @@ export default {
       data: [],
       columns,
       lang: 0,
+      showRed: true,
+      showYellow: true,
     }
   },
   methods: {
-    onChange (e) {
-      console.log(`checked = ${e.target.checked}`)
-    },
     fetch () {
       let slef = this;
       axios.get('/static/data.json')
