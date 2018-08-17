@@ -11,7 +11,10 @@
       </a-radio-group>
     </div>
 
-    <a-table :columns="columns" :dataSource="data"/>
+    <a-table :columns="columns" :dataSource="data">
+      <span slot="score" slot-scope="text, record, index">{{ record.homeScore }} - {{ record.guestScore}}</span>
+      <span slot="homeScore" slot-scope="text, record, index">{{ record.homeHalfScore }} - {{ record.guestHalfScore}}</span>
+    </a-table>
 
   </div>
 </template>
@@ -22,27 +25,23 @@
   const columns = [{
     title: '赛事',
     dataIndex: 'league[0]',
-    key: 'league',
   }, {
     title: '时间',
     dataIndex: 'matchTime',
-    key: 'matchTime',
   }, {
     title: '主队',
     dataIndex: 'home[0]',
-    key: 'home',
   }, {
     title: '全场比分',
     dataIndex: 'score',
-    key: 'score',
+    scopedSlots: { customRender: 'score' },
   }, {
     title: '客队',
     dataIndex: 'guest[0]',
-    key: 'home',
   }, {
     title: '半场比分',
-    dataIndex: 'halfScore',
-    key: 'halfScore',
+    dataIndex: 'homeScore',
+    scopedSlots: { customRender: 'homeScore' },
   }];
 
 export default {
