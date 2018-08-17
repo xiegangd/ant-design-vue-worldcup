@@ -17,42 +17,42 @@
 </template>
 
 <script>
-  const columns = [{
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  }, {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  }, {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  }];
+  import axios from 'axios'
 
-  const data = [{
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
+  const columns = [{
+    title: '赛事',
+    dataIndex: 'league[0]',
+    key: 'league',
   }, {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
+    title: '时间',
+    dataIndex: 'matchTime',
+    key: 'matchTime',
   }, {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
+    title: '主队',
+    dataIndex: 'home[0]',
+    key: 'home',
+  }, {
+    title: '全场比分',
+    dataIndex: 'score',
+    key: 'score',
+  }, {
+    title: '客队',
+    dataIndex: 'guest[0]',
+    key: 'home',
+  }, {
+    title: '半场比分',
+    dataIndex: 'halfScore',
+    key: 'halfScore',
   }];
 
 export default {
   name: 'HelloWorld',
+  mounted () {
+    this.fetch()
+  },
   data () {
     return {
-      data,
+      data: [],
       columns,
     }
   },
@@ -60,6 +60,13 @@ export default {
     onChange (e) {
       console.log(`checked = ${e.target.checked}`)
     },
+    fetch () {
+      let slef = this;
+      axios.get('/static/data.json')
+        .then(function (response) {
+          slef.data = response.data.results
+        });
+    }
   },
 }
 </script>
