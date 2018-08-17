@@ -11,7 +11,10 @@
       </a-radio-group>
     </div>
 
-    <a-table :columns="columns" :dataSource="data" size="middle" :pagination="pagination">
+    <a-table :columns="columns" :dataSource="data" size="middle" :pagination="pagination" :loading="loading">
+      <template slot="matchTime" slot-scope="matchTime, match">
+        <span :title="match.matchYear+'-'+match.matchDate+' ' + match.matchTime">{{ match.matchDate + " " + match.matchTime }}</span>
+      </template>
       <template slot="league" slot-scope="league">{{ league[lang] }}</template>
       <template slot="home" slot-scope="home, match">
         <a-badge :count="match.homeYellow" v-show="showYellow" :numberStyle="{'border-radius':0,backgroundColor: 'yellow', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset'}" />
@@ -41,6 +44,7 @@
   }, {
     title: '时间',
     dataIndex: 'matchTime',
+    scopedSlots: { customRender: 'matchTime' },
     align: 'center',
   }, {
     title: '主队',
@@ -77,14 +81,17 @@ export default {
       showRed: true,
       showYellow: true,
       pagination: false,
+      loading: false,
     }
   },
   methods: {
     fetch () {
-      let slef = this;
+      let self = this;
+      self.loading = true
       axios.get('/static/data.json')
         .then(function (response) {
-          slef.data = response.data.results
+          self.loading = false
+          self.data = response.data.results
         });
     }
   },
