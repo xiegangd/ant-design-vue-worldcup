@@ -28,6 +28,35 @@
       </template>
       <span slot="score" slot-scope="text, record, index">{{ record.homeScore }} - {{ record.guestScore}}</span>
       <span slot="homeScore" slot-scope="text, record, index">{{ record.homeHalfScore }} - {{ record.guestHalfScore}}</span>
+
+      <template slot="operation" slot-scope="text, match">
+        <a-dropdown :trigger="['click']">
+          <a class="ant-dropdown-link" href="#">
+            模拟 <a-icon type="down" />
+          </a>
+          <a-menu slot="overlay">
+            <a-menu-item key="0">
+              <a @click="op('homeScore', match.matchId)">主队进球 +1</a>
+            </a-menu-item>
+            <a-menu-item key="1">
+              <a @click="op('homeRed', match.matchId)">主队红牌 +1</a>
+            </a-menu-item>
+            <a-menu-item key="2">
+              <a @click="op('homeYellow', match.matchId)">主队黄牌 +1</a>
+            </a-menu-item>
+            <a-menu-divider />
+            <a-menu-item key="3">
+              <a @click="op('guestScore', match.matchId)">客队进球 +1</a>
+            </a-menu-item>
+            <a-menu-item key="4">
+              <a @click="op('guestRed', match.matchId)">客队红牌 +1</a>
+            </a-menu-item>
+            <a-menu-item key="5">
+              <a @click="op('guestYellow', match.matchId)">客队黄牌 +1</a>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
+      </template>
     </a-table>
 
   </div>
@@ -66,6 +95,11 @@
     dataIndex: 'homeScore',
     scopedSlots: { customRender: 'homeScore' },
     align: 'center',
+  }, {
+    title: '本地模拟',
+    dataIndex: 'operation',
+    scopedSlots: { customRender: 'operation' },
+    align: 'right',
   }];
 
 export default {
@@ -93,6 +127,44 @@ export default {
           self.loading = false
           self.data = response.data.results
         });
+    },
+    op (type, matchId) {
+      //定位行
+      let foundIndex = this.data.findIndex(x => x.matchId == matchId)
+      if (foundIndex != -1){
+        let currentMatch = this.data[foundIndex];
+        let currentMatchHome = currentMatch.home[this.lang]
+        let currentMatchGuest = currentMatch.guest[this.lang]
+        //更新数据
+        let msg = ''
+        switch (type) {
+          case 'homeScore':
+            currentMatch.homeScore ++;
+            msg = `${currentMatchHome} (${currentMatch.homeScore} : ${currentMatch.guestScore}) ${currentMatchGuest}`
+            this.$message.success(msg, 5);
+            break;
+          case 'homeRed':
+            currentMatch.homeRed ++;
+            break;
+          case 'homeYellow':
+            currentMatch.homeYellow ++;
+            break;
+          case 'guestScore':
+            currentMatch.guestScore ++;
+            msg = `${currentMatchHome} (${currentMatch.homeScore} : ${currentMatch.guestScore}) ${currentMatchGuest}`
+            this.$message.success(msg, 5);
+            break;
+          case 'guestRed':
+            currentMatch.guestRed ++;
+            break;
+          case 'guestYellow':
+            currentMatch.guestYellow ++;
+            break;
+        }
+
+      }else {
+        this.$message.error('数据异常', 10);
+      }
     }
   },
 }
