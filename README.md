@@ -2,8 +2,8 @@
 
 > 基于 ant-design-vue 实现的一个用来回顾 2018 年世界杯所有 64 场比赛信息的演示页面
 
-## 操作演示
-![ant-design-vue-worldcup](http://www.xiegangd.com/image/worldcup.gif "ant-design-vue-worldcup")
+## 截图
+![ant-design-vue-worldcup](http://www.xiegangd.com/image/worldcup.png "ant-design-vue-worldcup")
 
 ## 如何使用
 
