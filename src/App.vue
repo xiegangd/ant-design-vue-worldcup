@@ -1,26 +1,22 @@
 <template>
   <div id="app">
-    <!-- As a link -->
     <nav class="navbar navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">World Cup 2018</a>
+        <a class="navbar-brand" href="/">World Cup 2018</a>
       </div>
     </nav>
 
     <div class="container">
-      <div class="wc mt-3">
-        <HelloWorld/>
-      </div>
+      <HelloWorld/>
     </div>
-
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
     HelloWorld
   }
