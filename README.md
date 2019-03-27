@@ -1,6 +1,6 @@
 # ant-design-vue-worldcup
 
-> 基于 ant-design-vue 实现的一个用来回顾 2018 年世界杯所有 64 场比赛信息的演示页面
+> 基于 vue.js 及 ant-design-vue 实现的一个用来展示足球比赛数据的页面。学习 vue 及 ant-design-vue 的练手小项目
 
 ## 截图
 ![ant-design-vue-worldcup](https://xiegangd-img.oss-cn-shenzhen.aliyuncs.com/screenshot/worldcup.png "ant-design-vue-worldcup")
@@ -35,3 +35,5 @@ npm serve
 ```shell
 http://localhost:8080
 ```
+##  视频
+[ant-design-vue-worldcup 实现过程全记录](http://www.xiegangd.com/course/153440229170328 "使用 Vue + Ant Design UI 组件展示足球比赛数据")
