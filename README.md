@@ -1,4 +1,4 @@
-# ant-design-vue-worldcup
+# 使用 Vue + Ant Design UI 组件展示足球比赛数据
 
 > 基于 vue.js 及 ant-design-vue 实现的一个用来展示足球比赛数据的页面。学习 vue 及 ant-design-vue 的练手小项目
 
